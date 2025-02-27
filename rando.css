@@ -1,0 +1,23 @@
+document.getElementById('generate-button').addEventListener('click', function() {
+    const text = document.getElementById('text-input').value;
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const backgroundImage = new Image();
+    backgroundImage.src = 'background.jpg';
+
+    backgroundImage.onload = function() {
+        // Draw the background image
+        ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+
+        // Set the font size dynamically based on canvas width
+        let fontSize = Math.min(canvas.width / text.length * 2, 80); // Keep text size proportional
+        ctx.font = `${fontSize}px Arial`;
+        ctx.fillStyle = 'white';  // You can change this to another color
+        ctx.textAlign = 'center'; // Center the text
+        ctx.textBaseline = 'middle'; // Center vertically
+
+        // Draw the text on the canvas
+        ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+    };
+});
